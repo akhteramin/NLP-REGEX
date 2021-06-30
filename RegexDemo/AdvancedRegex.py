@@ -180,3 +180,36 @@ print(x)
 #[('10 Gigabytes ', '', 'Gigabytes')]
 
 # ---------------------Substitution, Capture Groups ---------------------------
+x = re.sub(r'([0-9]+)',r'<\1>',"this is a PC having 10 Gigabytes disk.")
+print(x)
+ #this is a PC having <10> Gigabytes disk.
+
+#---------------------Capture Group---------------------------------------------
+x = re.sub(r'([0-9]+),([0-9]+)',r'\1.\2',"this is a PC having 10,456 Gigabytes disk.")
+print(x)
+
+#this is a PC having 10.456 Gigabytes disk.
+
+#\1 \2 - refers to the number in the register that indicates the sequence of regex(capture) group matched.
+
+#---------------------Non-capturing Group----------------------------------------
+# For example, we do not want a pattern to be included in capturing group. This is called non-capturing group.
+# We can use this `?:` pattern to indicate that as non-capturing group.
+x = re.sub(r'(?:[0-9]+),([0-9]+)',r'.\1',"this is a PC having 10 Microchip. We need them to inform this 10,456 Gigabytes disk.")
+print(x)
+
+#this is a PC having 10 Microchip. We need them to inform this .456 Gigabytes disk.
+
+#--------------------Lookahead Assertions----------------------------------------
+#For instance, we do not want a line beginning with "Volcano". We can use negative lookahead.
+# ?! pattern - will only return true if a pattern does not match.
+
+x = re.findall(r'^(?!Volcano)[A-Za-z]+',"Volcano is a terrific place to go")
+print(x)
+#[]
+
+x = re.findall(r'^(?!Volcano)[A-Za-z]+',"Hawai is a terrific place to go")
+print(x)
+#['Hawai']
+
+
